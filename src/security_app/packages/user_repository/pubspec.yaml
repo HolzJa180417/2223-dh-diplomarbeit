@@ -1,5 +1,5 @@
-name: security_app
-description: A flutter security app demo.
+name: user_repository
+description: The repository, which handles all user authentication realted requests.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.

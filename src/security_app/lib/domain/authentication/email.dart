@@ -1,0 +1,1 @@
+//checks if email is valid 

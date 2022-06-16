@@ -1,0 +1,1 @@
+//widget for the map for the security shown, if panic button was pressed
