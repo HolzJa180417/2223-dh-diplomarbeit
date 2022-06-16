@@ -20,26 +20,33 @@ Wir arbeiten mit der Firma BizzNetIT zusammen. Jonas arbeitet dort.
 	\begin{tabular}{|c|c|}
 		\hline
 		Jakob Holzinger   & Jonas Denk                 \\ \hline
-		Authentifizierung & Google Maps implementation \\ \hline
-		x                 & x                          \\ \hline
-		x                 & x                          \\ \hline
+		Authentifizierung für beide User-Typen & GPS und Google-Maps implementation \\ \hline
+		Datenbankoperationen für Authentifizierung                 & Benachrichtigungssystem bei Notfall                          \\ \hline
+		Gruppensystem                 & Generelles Design und Funktionalität der App                          \\ \hline
 	\end{tabular}
 \end{table}
 \section{Konzept}
 \subsection{Authentifizierung}
-Prinzipiell gibt es zwei Arten von Usern. Den Security-User (Personal der Security-Firma) und den normalen User (Personen, welche die App besitzen). Es wird daher zwei Arten von Log-in's geben, einmal den Login wo sich die Securities einloggen und den wo sich die normalen User anmelden. 
-\begin{figure}[H] \includegraphics[scale=0.75]{login} \centering \caption{Log-in Screen} \end{figure}
+Prinzipiell gibt es zwei Arten von Usern. Den gewerblichen (Personal der Security-Firmen) und den privaten User (Personen, welche die App privat nutzen). 
+Gewerbliche Nutzer können bei der Registrierung einen Code angeben. Dieser wird von BizzNet verwaltet und jede Security Firma hat einen spezifischen Code und für jeden Code ist eine gewisse E-Mail hinterlegt. Wenn sich nun ein Security bei der App als ein solcher registrieren will, muss er diesen Code angeben und anschließend wird eine Mail an die zum Code registrierten E-Mail gesendet, wo bestätigt werden muss, dass es sich tatsächlich um einen Mitarbeiter der Firma handelt, oder jemanden der den Code auf einen anderern Weg bekommen hat.
+Man kann auch noch eine Ausweiskontrolle bei der Registirerung einführen um eventuellen Missbrauch des Services vorzubeugen und anzuzeigen. Dies würde dann beispielsweise über den Service yoti geschehen.
+Wir sammeln Vorname, Nachname, Telefonnummer, E-Mail, Geburtsjahr, Geschlecht, optional kann auch ein Foto von sich selbst hochgeladen werden um im Notfall schneller erkannt zu werden. Diese Daten werden auf den Datenbankservern von BizzNet gespeichert. Natürlich unter Berücksichtigung der DsGvo.
 \subsection{Datenbankzugriff}
-Wir benötigen für den Authentifizierungsprozess natürlich eine Datenbank. In dieser werden die Anmeldedaten der User gespeichert.
+Wir benötigen für den Authentifizierungsprozess natürlich eine Datenbank. In dieser werden die Anmeldedaten der User gespeichert. Wir bekommen von der Firma einen Zugriff auf den Datenbankserver per SSH. Wir werden in einer Besprechung mit der Firma die Struktur der Datenbank erarbeiten, dies wird in den nächsten Wochen geschehen.
 \subsection{Was passiert wenn jemand den Notfall Knopf drückt?}
 Wenn ein User in der App den Panic-Button auslöst wird ein Signal ausgesendet, dass der User Hilfe benötigt. 
 Die App schaut im Umkreis nach, ob Security Mitarbeiter aufzufinden sind. 
 Falls ja, wird an diese eine Benachrichtigung mit dem Ort des Users, welcher den Alarm ausgelöst hat, gesendet. 
 Es wird dem Security Mitarbeiter ebenfalls, der schnellste Weg zum Opfer, in der App gezeigt (per Google Maps implementation). 
-Wird kein Mitarbeiter im näheren Umkreis (ca. 2km) gefunden, geht die Benachrichtigung an alle User der App raus. Falls sich im näheren Umkreis keine User finden lassen wird die Umkreissuche so lange erweitert, bis User benachrichtigt werden. 
+Wird kein Mitarbeiter im näheren Umkreis (ca. 2km) gefunden, geht die Benachrichtigung an alle User der App, die sich im näheren Umkreis befinden. Falls sich im näheren Umkreis keine User finden lassen wird die Umkreissuche so lange erweitert, bis User benachrichtigt werden. 
 Wenn ein User den Notfallknopf betätigt wird automatisch das GPS auf seinem Gerät aktiviert, um den Helfenden die Möglichkeit zu geben den Alarmierenden zu finden.
-\subsection{Dokumentation und Versionsverwaltung}
-Dokumentiert wird bei uns ausschließlich in LaTex. 
-Alle Referenzen werden in einem gemeinsam genutzten bibliography-file gespeichert.
-Als Versionsverwaltung verwenden wir git. Unser Repository ist zu finden unter: INSERT LINK
+Weiters ist noch angedacht, dass stille Alarme an Security Firmen aus der App gesendet werden können.
+\subsection{Möglichkeiten für die User}
+Man soll auch Gruppen mit anderen Usern erstellen können. Von privaten Nutzern könnte man hier einen kleinen jährlichen Betrag verlangen, falls sie dieses Feature verwenden wollen. Für gewerbliche Nutzer ist das Feature hilfreich. Zum Beispiel, wenn Security Firmen eine Gruppe mit dem Sicherheitspersonal für ein gewisses Event, erstellen wollen, um diese auf einen Blick zu haben. Denn wenn man in einer Gruppe ist hat man eine Kartenansicht, auf welcher man die Standorte, der sich in der Gruppe befindenden User, sieht. Private Nutzer könnten dann zum Beispiel Familiengruppen erstellen.
+\subsection{Technische Realisierung}
+Dokumentiert wird bei uns ausschließlich in LaTex. Die Dokumentation zum Projekt ist in unserem GitHub-Repository im Ordner doc/ zu finden.
+Alle Referenzen werden in einem gemeinsam genutzten bibliography-file gespeichert. Dieses befindet sich ebenfalls im doc/ Verzeichnis.
+Als Versionsverwaltung verwenden wir git. Die App wird cross-plattform für iOS und Android entwickelt, dies erreichen wir durch den Einsatz von Flutter, mit Dart als Programmiersprache. Auf dem Datenbankserver wird dann MariaDB laufen und der Zugriff in Flutter wird über SQLite geschehen.\\
+In unserem GitHub-Repository haben wir den Chef von BizzNet bereits als Collaborator hinzugefügt und würden das auch mit Ihnen machen, falls Sie sich dazu entscheiden, unser Betreungslehrer zu sein. \\
+Unser Repository ist zu finden unter: https://github.com/HolzJa180417/2223-dh-diplomarbeit
 \end{document}
