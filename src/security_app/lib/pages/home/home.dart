@@ -1,4 +1,4 @@
-//export class for the whole home page, will import widgets and view export file
+//export class for the whole home page, will import widgets
 import 'package:flutter/material.dart';
 
 class MyHomeScreen extends StatelessWidget {

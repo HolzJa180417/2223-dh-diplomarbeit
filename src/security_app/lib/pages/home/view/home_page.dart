@@ -1,1 +1,0 @@
-//scaffold for the home page

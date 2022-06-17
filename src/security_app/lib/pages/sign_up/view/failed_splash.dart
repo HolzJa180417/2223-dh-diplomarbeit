@@ -1,0 +1,1 @@
+//splash screen if registration was not sucessful
