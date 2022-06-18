@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:security_app/models/person.dart';
 import 'package:security_app/pages/sign_up/view/sucessful_splash.dart';
 import 'package:security_app/pages/sign_up/widgets/text_box.dart';
 
@@ -33,8 +34,8 @@ class _Sign_upState extends State<Sign_up> {
       textInputType: TextInputType.visiblePassword);
   TextBox emailBox =
       TextBox(label: "E-Mail", textInputType: TextInputType.emailAddress);
-  TextBox codeBox = TextBox(
-      label: "Code (falls vorhanden)", textInputType: TextInputType.number);
+  //TextBox codeBox = TextBox(
+  //label: "Code (falls vorhanden)", textInputType: TextInputType.number);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +51,6 @@ class _Sign_upState extends State<Sign_up> {
             pBox,
             pbBox,
             emailBox,
-            codeBox,
             FloatingActionButton(
               onPressed: () {
                 Navigator.push(
@@ -62,4 +62,14 @@ class _Sign_upState extends State<Sign_up> {
           ],
         ));
   }
+}
+
+Person createDatabaseObject(
+    String firstName, String lastName, int age, String password, String email) {
+  return Person(
+      firstName: firstName,
+      lastName: lastName,
+      age: age,
+      email: email,
+      password: password);
 }
