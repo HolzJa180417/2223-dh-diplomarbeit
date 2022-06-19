@@ -1,10 +1,10 @@
 
-.aux
-.bbl
-.bcf
-.blg
-.log
-.run.xml
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.log
+*.run.xml
 
 ### Dart ###
 # See https://www.dartlang.org/guides/libraries/private-files
