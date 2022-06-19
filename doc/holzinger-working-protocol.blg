@@ -1,0 +1,15 @@
+[0] Config.pm:307> INFO - This is Biber 2.17
+[0] Config.pm:310> INFO - Logfile is '/home/jakob/_repos/2223-dh-diplomarbeit/doc/holzinger-working-protocol.blg'
+[61] biber:340> INFO - === Sun Jun 19, 2022, 19:16:01
+[72] Biber.pm:418> INFO - Reading '/home/jakob/_repos/2223-dh-diplomarbeit/doc/holzinger-working-protocol.bcf'
+[127] Biber.pm:972> INFO - Found 4 citekeys in bib section 0
+[137] Biber.pm:4383> INFO - Processing section 0
+[146] Biber.pm:4574> INFO - Looking for bibtex file 'references.bib' for section 0
+[147] bibtex.pm:1713> INFO - LaTeX decoding ...
+[156] bibtex.pm:1518> INFO - Found BibTeX data source '/home/jakob/_repos/2223-dh-diplomarbeit/doc/references.bib'
+[178] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[178] UCollate.pm:68> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[178] Biber.pm:4203> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'en-US'
+[178] Biber.pm:4209> INFO - No sort tailoring available for locale 'en-US'
+[184] bbl.pm:654> INFO - Writing '/home/jakob/_repos/2223-dh-diplomarbeit/doc/holzinger-working-protocol.bbl' with encoding 'UTF-8'
+[186] bbl.pm:757> INFO - Output to /home/jakob/_repos/2223-dh-diplomarbeit/doc/holzinger-working-protocol.bbl
