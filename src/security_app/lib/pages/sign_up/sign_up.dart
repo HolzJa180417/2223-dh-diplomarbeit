@@ -1,26 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:security_app/models/person.dart';
+import 'package:security_app/domain/authentication/registration_manager.dart';
 import 'package:security_app/pages/sign_up/view/sucessful_splash.dart';
 import 'package:security_app/pages/sign_up/widgets/text_box.dart';
 
-class Sign_up extends StatefulWidget {
-  Sign_up({Key? key}) : super(key: key);
+class SignUp extends StatefulWidget {
+  const SignUp({Key? key}) : super(key: key);
 
   @override
-  State<Sign_up> createState() => _Sign_upState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _Sign_upState extends State<Sign_up> {
+class _SignUpState extends State<SignUp> {
   TextEditingController getController() {
     return TextEditingController();
   }
 
-  late String firstName;
-  late String lastName;
-  late String email;
-  late String age;
-  late String phoneNumber;
-  late String password;
   TextBox fNameBox =
       TextBox(label: "Vorname", textInputType: TextInputType.name);
   TextBox lNameBox =
@@ -29,18 +23,20 @@ class _Sign_upState extends State<Sign_up> {
       TextBox(label: "Geburtsjahr", textInputType: TextInputType.number);
   TextBox pBox =
       TextBox(label: "Passwort", textInputType: TextInputType.visiblePassword);
-  TextBox pbBox = TextBox(
-      label: "Passwort bestätigen",
-      textInputType: TextInputType.visiblePassword);
   TextBox emailBox =
       TextBox(label: "E-Mail", textInputType: TextInputType.emailAddress);
-  //TextBox codeBox = TextBox(
-  //label: "Code (falls vorhanden)", textInputType: TextInputType.number);
+  TextBox codeBox = TextBox(
+      label: "Code (falls vorhanden)", textInputType: TextInputType.number);
+  TextBox phoneBox =
+      TextBox(label: "Telefonnummer", textInputType: TextInputType.phone);
+  TextBox genderBox =
+      TextBox(label: "Geschlecht", textInputType: TextInputType.text);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Sign-Up"),
+          title: const Text("Sign-Up"),
           centerTitle: true,
         ),
         body: Column(
@@ -49,27 +45,38 @@ class _Sign_upState extends State<Sign_up> {
             lNameBox,
             ageBox,
             pBox,
-            pbBox,
             emailBox,
+            codeBox,
+            phoneBox,
+            genderBox,
             FloatingActionButton(
               onPressed: () {
+                var rManager = RegistrationManager(
+                    firstName: fNameBox.controller.text,
+                    lastName: lNameBox.controller.text,
+                    age: ageBox.controller.text,
+                    email: emailBox.controller.text,
+                    code: codeBox.controller.text,
+                    password: pBox.controller.text,
+                    phoneNumber: phoneBox.controller.text,
+                    hasPhoto: "1",
+                    gender: genderBox.controller.text);
+                rManager.startRegister();
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const SuccesSplashScreen()));
+                        builder: (context) => SuccesSplashScreen(
+                            firstName: fNameBox.controller.text,
+                            lastName: lNameBox.controller.text,
+                            age: ageBox.controller.text,
+                            email: emailBox.controller.text,
+                            phoneNumber: phoneBox.controller.text,
+                            password: pBox.controller.text,
+                            code: codeBox.controller.text,
+                            gender: genderBox.controller.text)));
               },
             ),
           ],
         ));
   }
-}
-
-Person createDatabaseObject(
-    String firstName, String lastName, int age, String password, String email) {
-  return Person(
-      firstName: firstName,
-      lastName: lastName,
-      age: age,
-      email: email,
-      password: password);
 }
