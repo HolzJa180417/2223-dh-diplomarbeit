@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:security_app/exceptions/custom_exception.dart';
 import 'package:security_app/models/person.dart';
+import 'package:security_app/providers/navigation_provider.dart';
 
 class RegistrationManager {
   final String firstName;
@@ -26,40 +27,27 @@ class RegistrationManager {
       required this.gender,
       required this.hasPhoto});
 
-  startRegister() async {
-    String apiurl =
-        "http://192.168.178.50/authentication/register.php"; //api url
-    //dont use http://localhost , because emulator don't get that address
-    //insted use your local IP address or use live URL
-    //hit "ipconfig" in windows or "ip a" in linux to get you local IP
+  Future<String> startRegister() async {
+    var phpScript = "http://192.168.178.50/authentication/register.php";
 
-    var response = await http.post(Uri.parse(apiurl), body: {
-      'email': email, //get the email text
-      'password': password, //get password text
+    var response = await http.post(Uri.parse(phpScript), body: {
+      'email': email,
+      'password': password,
       'yearOfBirth': age,
       'firstName': firstName,
       'lastName': lastName,
       'code': code,
       'phoneNumber': phoneNumber,
       'gender': gender,
-      'hasPhoto': 1
+      'hasPhoto': "1"
     });
 
-    if (response.statusCode == 200) {
-      var jsondata = json.decode(response.body);
-      if (jsondata["error"]) {
-        throw CustomException("Die E-Mail oder das Passwort sind falsch!");
-      } else {
-        if (!jsondata["success"]) {
-          throw CustomException(
-              "Es ist etwas schiefgelafuen beim Registrieren.");
-        } else {
-          createDatabaseObject(firstName, lastName, age, password, email,
-              gender, phoneNumber, hasPhoto, code);
-        }
-      }
+    if (response.statusCode == 200 && response.body == "success") {
+      createDatabaseObject(firstName, lastName, age, password, email, gender,
+          phoneNumber, hasPhoto, code);
+      return response.body;
     } else {
-      throw CustomException("Keine Verbindung zum Server!");
+      return response.body;
     }
   }
 }

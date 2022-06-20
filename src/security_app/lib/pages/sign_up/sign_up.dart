@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:security_app/domain/authentication/registration_manager.dart';
+import 'package:security_app/pages/sign_up/view/failed_splash.dart';
 import 'package:security_app/pages/sign_up/view/sucessful_splash.dart';
 import 'package:security_app/pages/sign_up/widgets/text_box.dart';
 
@@ -61,19 +62,41 @@ class _SignUpState extends State<SignUp> {
                     phoneNumber: phoneBox.controller.text,
                     hasPhoto: "1",
                     gender: genderBox.controller.text);
-                rManager.startRegister();
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => SuccesSplashScreen(
-                            firstName: fNameBox.controller.text,
-                            lastName: lNameBox.controller.text,
-                            age: ageBox.controller.text,
-                            email: emailBox.controller.text,
-                            phoneNumber: phoneBox.controller.text,
-                            password: pBox.controller.text,
-                            code: codeBox.controller.text,
-                            gender: genderBox.controller.text)));
+                String response = "";
+                rManager.startRegister().then((String value) {
+                  setState(() {
+                    response = value;
+                  });
+                });
+                if (response == "success") {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SuccesSplashScreen(
+                              firstName: fNameBox.controller.text,
+                              lastName: lNameBox.controller.text,
+                              age: ageBox.controller.text,
+                              email: emailBox.controller.text,
+                              phoneNumber: phoneBox.controller.text,
+                              password: pBox.controller.text,
+                              code: codeBox.controller.text,
+                              gender: genderBox.controller.text)));
+                } else {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => FailedSplashScreen(
+                                firstName: fNameBox.controller.text,
+                                lastName: lNameBox.controller.text,
+                                age: ageBox.controller.text,
+                                email: emailBox.controller.text,
+                                phoneNumber: phoneBox.controller.text,
+                                password: pBox.controller.text,
+                                code: codeBox.controller.text,
+                                gender: genderBox.controller.text,
+                                errorString: response,
+                              )));
+                }
               },
             ),
           ],
