@@ -1,6 +1,10 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/latex,flutter,dart
-# Edit at https://www.toptal.com/developers/gitignore?templates=latex,flutter,dart
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.log
+*.run.xml
 
 ### Dart ###
 # See https://www.dartlang.org/guides/libraries/private-files
