@@ -1,9 +1,5 @@
-import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-import 'package:security_app/exceptions/custom_exception.dart';
 import 'package:security_app/models/person.dart';
-import 'package:security_app/providers/navigation_provider.dart';
 
 class RegistrationManager {
   final String firstName;
@@ -28,7 +24,7 @@ class RegistrationManager {
       required this.hasPhoto});
 
   Future<String> startRegister() async {
-    var phpScript = "http://192.168.178.50/authentication/register.php";
+    var phpScript = "http://192.168.122.174/authentication/register.php";
 
     var response = await http.post(Uri.parse(phpScript), body: {
       'email': email,

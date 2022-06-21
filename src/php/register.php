@@ -24,7 +24,6 @@ $result = mysqli_query($con,$query) or die(mysqli_error());
 
 if(mysqli_num_rows($result) > 0){
 	$msg = "email-exists-error" ;
-	header("Content-Type: application/json");
 	echo $msg;
 	exit();
 }
@@ -68,7 +67,7 @@ if(!preg_match("/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za
 
 if((preg_match("/^[a-zA-Z]*$/", $_first_name)) && (preg_match("/^[a-zA-Z]*$/", $_last_name)) &&
 (preg_match("/^[0-9]{11}+$/", $_phone_number)) && (preg_match("/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{8,20}$/", $_password))){
-	$password_hash = password_hash($password, PASSWORD_BCRYPT);
+	$password_hash = password_hash($password, PASSWORD_DEFAULT);
 	$query = "INSERT INTO Registrierungsdaten (firstName,lastName,phoneNumber, email, yearOfBirth, gender, hasPhoto, code, password_hash) VALUES ('{$firstName}','{$lastName}','{$phoneNumber}','{$email}','{$age}','{$gender}','{$hasPhoto}', '{$code}', '{$password_hash}')";
 	$sql_query = mysqli_query($con, $query);
 

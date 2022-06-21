@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class ErrorInfo extends StatelessWidget {
   final String errorString;
@@ -18,13 +16,13 @@ class ErrorInfo extends StatelessWidget {
               Container(
                 width: 360,
                 height: 230,
-                color: Colors.lightBlue,
+                color: Colors.grey,
                 child: Align(
                   alignment: Alignment.center,
                   child: Text(
                     errorString,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 20, color: Colors.black),
+                    style: const TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 ),
               ),

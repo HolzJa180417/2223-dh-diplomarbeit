@@ -4,18 +4,14 @@ import 'package:security_app/pages/sign_up/view/failed_splash.dart';
 import 'package:security_app/pages/sign_up/view/sucessful_splash.dart';
 import 'package:security_app/pages/sign_up/widgets/text_box.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({Key? key}) : super(key: key);
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpState extends State<SignUp> {
-  TextEditingController getController() {
-    return TextEditingController();
-  }
-
+class _SignUpScreenState extends State<SignUpScreen> {
   TextBox fNameBox =
       TextBox(label: "Vorname", textInputType: TextInputType.name);
   TextBox lNameBox =
@@ -67,25 +63,11 @@ class _SignUpState extends State<SignUp> {
                   setState(() {
                     response = value;
                   });
-                });
-                if (response == "success") {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => SuccesSplashScreen(
-                              firstName: fNameBox.controller.text,
-                              lastName: lNameBox.controller.text,
-                              age: ageBox.controller.text,
-                              email: emailBox.controller.text,
-                              phoneNumber: phoneBox.controller.text,
-                              password: pBox.controller.text,
-                              code: codeBox.controller.text,
-                              gender: genderBox.controller.text)));
-                } else {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => FailedSplashScreen(
+                  if (response == "success") {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SuccesSplashScreen(
                                 firstName: fNameBox.controller.text,
                                 lastName: lNameBox.controller.text,
                                 age: ageBox.controller.text,
@@ -93,10 +75,17 @@ class _SignUpState extends State<SignUp> {
                                 phoneNumber: phoneBox.controller.text,
                                 password: pBox.controller.text,
                                 code: codeBox.controller.text,
-                                gender: genderBox.controller.text,
-                                errorString: response,
-                              )));
-                }
+                                gender: genderBox.controller.text)));
+                  } else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FailedSplashScreen(
+                                  errorString: response,
+                                  operation: "Fehler beim Registrieren",
+                                )));
+                  }
+                });
               },
             ),
           ],

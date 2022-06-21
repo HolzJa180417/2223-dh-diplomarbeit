@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:security_app/pages/sign_up/sign_up.dart';
+import 'package:security_app/pages/login/log_in_screen.dart';
+import 'package:security_app/pages/sign_up/sign_up_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +16,30 @@ class MyApp extends StatelessWidget {
       theme: ThemeData.dark(),
       initialRoute: '/',
       routes: {
-        '/': (context) => const SignUp(),
+        '/': (context) => Column(
+              children: <Widget>[
+                FloatingActionButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LogInScreen()));
+                  },
+                  heroTag: "btnLogIn",
+                  child: const Text("Log-in"),
+                ),
+                FloatingActionButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignUpScreen()));
+                  },
+                  heroTag: "btnRegister",
+                  child: const Text("Register"),
+                )
+              ],
+            ),
       },
     );
   }
